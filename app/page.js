@@ -7,6 +7,8 @@ export default function Home() {
 
   const [colour, setColour] = useState("#ef9052");
   const [isGradient, setIsGradient] = useState(false);
+  const [isDirection, setIsDirection] = useState(false); 
+  const [direction, setDirection] = useState('2deg')
   const [colour2, setColour2] = useState("#ef9052");
 
   const[showPicker1, setShowPicker1] = useState(false);
@@ -33,6 +35,10 @@ export default function Home() {
     }
   };
 
+  const handleDirectionChange = (e) => {
+    setDirection(e.target.input)
+  }
+
   const handleButton1 = (e) => {
     setShowPicker1(!showPicker1);
   }
@@ -46,7 +52,7 @@ export default function Home() {
     className={`flex min-h-screen flex-col items-center justify-center gap-10 p-24 ${white ? 'dark' : 'light'} `}
     style={{ 
       background: isGradient 
-        ? `linear-gradient(to right, ${colour}, ${colour2})` 
+        ? `linear-gradient(${direction}, ${colour}, ${colour2})` 
         : colour 
     }}
   >      
@@ -71,6 +77,7 @@ export default function Home() {
       <label for="checkbox" className="dark:text-white">Select for gradient</label>
       <input type="checkbox" id="checkbox" onChange={() => setIsGradient(!isGradient)} className="size-6">
       </input>
+      <label for="direction" className="dark:text-white">Gradient Direction \()</label>
 
       </div>
       <div className="flex flex-row gap-12 text-4xl">
