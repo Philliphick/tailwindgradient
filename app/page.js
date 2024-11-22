@@ -11,9 +11,12 @@ export default function Home() {
 
   const[showPicker1, setShowPicker1] = useState(false);
   const [showPicker2, setShowPicker2] = useState(false)
-
   const [white, setWhite] = useState(false);
+  const [copyStr, setCopyStr] = useState("");
 
+  useEffect(() => {
+    setCopyStr(`bg-gradient-to-r from-${colour} to-${colour2}`)
+  }, [colour, colour2])
  
   const handleColourChange = (e) => {
     setColour(e.hex);
@@ -40,10 +43,11 @@ export default function Home() {
   const handleButton2 = (e) => {
     setShowPicker2(!showPicker2);
   }
-  
+
+
   return (
     <main 
-    className={`flex min-h-screen flex-col items-center justify-center gap-10 p-24 ${white ? 'dark' : 'light'} `}
+    className={`flex h-screen flex-col items-center justify-center gap-10 p-24 ${white ? 'dark' : 'light'} `}
     style={{ 
       background: isGradient 
         ? `linear-gradient(to right, ${colour}, ${colour2})` 
@@ -78,6 +82,11 @@ export default function Home() {
           {isGradient ? <h2 className="ring-4 p-4 dark:text-white">{colour2}</h2> : null}
       </div>
      
+{/* copy to clipboard */}
+      <div>
+        <h2 className="p-4 bg-slate-200 dark:bg-slate-700 dark:text-white">{copyStr}</h2>
+      </div>
+
       
     </main>
   );
